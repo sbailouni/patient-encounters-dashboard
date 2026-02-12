@@ -34,3 +34,83 @@
 .table th {
   background-color: #f5f5f5;
 }
+
+.flexContainer {
+  width: 90%;
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.searchBar {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid var(--button-secondary-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: var(--background);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.3s ease;
+  &:focus {
+    border-color: var(--button-primary-hover);
+  }
+}
+
+.dropdown {
+  position: relative;
+  padding: 8px 12px;
+  border: 1px solid var(--button-secondary-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: var(--background);
+}
+
+.dropdown:hover {
+  background-color: var(--button-secondary-hover);
+  transition: 0.3s ease;
+}
+
+.dropdown summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.dropdownSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chevron {
+  font-size: 0.65rem;
+  transition: transform 0.254s ease;
+}
+
+.dropdown[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.dropdownPanel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  margin-top: 4px;
+  min-width: 100%;
+  padding: 12px;
+  background: var(--foreground);
+  border: 1px solid var(--button-secondary-border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dropdownPanel label {
+  display: block;
+  padding: 6px 0;
+  cursor: pointer;
+}
