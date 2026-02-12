@@ -77,76 +77,78 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <h1>Patient Encounters Dashboard</h1>
-      <div className={styles.flexContainer}>
-        {/* Patient name search bar */}
-        <input
-          type="text"
-          placeholder="Search by patient name..."
-          value={searchInput}
-          //updates searchInput state whenever user types
-          onChange={(e)=> setSearchInput(e.target.value)}
-          className= {styles.searchBar}
-        />
-        {/* Dropdown status filter */}
-        <details
-          className={styles.dropdown}
-          ref={dropdownRef} //ref to the <details> element
-          open={isDropdownOpen} //tracks whether the dropdown is open or closed
-        >
-          <summary 
-            className={styles.dropdownSummary} 
-            onClick={(e) => { 
-              //prevent the default behavior of the click
-              e.preventDefault();
-              // toggle dropdown by setting state to opposite of the current state
-              // opened -> closed, closed -> opened
-              setIsDropdownOpen((prev) => !prev);
-            }}
+      <main className={styles.main}>
+        <h1>Patient Encounters Dashboard</h1>
+        <div className={styles.flexContainer}>
+          {/* Patient name search bar */}
+          <input
+            type="text"
+            placeholder="Search by patient name..."
+            value={searchInput}
+            //updates searchInput state whenever user types
+            onChange={(e)=> setSearchInput(e.target.value)}
+            className= {styles.searchBar}
+          />
+          {/* Dropdown status filter */}
+          <details
+            className={styles.dropdown}
+            ref={dropdownRef} //ref to the <details> element
+            open={isDropdownOpen} //tracks whether the dropdown is open or closed
           >
-            Filter by Status 
-            <span className={styles.chevron} aria-hidden>▼</span>
-          </summary>
-          <div className={styles.dropdownPanel}>
-            {/* Generate a check box for each status*/}
-            {["completed", "pending", "cancelled"].map((status) => (
-                <label
-                  key={status}
-                >
-                  <input
-                    type="checkbox"
-                    //checkbox is checked when status is included in selectedStatuses
-                    checked={selectedStatuses.includes(status)} 
-                    //toggle status when checkbox is clicked
-                    onChange={() => toggleStatus(status)}
-                  />
-                  {" "}{status}
-                </label>
-              ))}
-          </div>
-        </details>
-      </div>
+            <summary 
+              className={styles.dropdownSummary} 
+              onClick={(e) => { 
+                //prevent the default behavior of the click
+                e.preventDefault();
+                // toggle dropdown by setting state to opposite of the current state
+                // opened -> closed, closed -> opened
+                setIsDropdownOpen((prev) => !prev);
+              }}
+            >
+              Filter by Status 
+              <span className={styles.chevron} aria-hidden>▼</span>
+            </summary>
+            <div className={styles.dropdownPanel}>
+              {/* Generate a check box for each status*/}
+              {["completed", "pending", "cancelled"].map((status) => (
+                  <label
+                    key={status}
+                  >
+                    <input
+                      type="checkbox"
+                      //checkbox is checked when status is included in selectedStatuses
+                      checked={selectedStatuses.includes(status)} 
+                      //toggle status when checkbox is clicked
+                      onChange={() => toggleStatus(status)}
+                    />
+                    {" "}{status}
+                  </label>
+                ))}
+            </div>
+          </details>
+        </div>
 
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Patient Name</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* For each encounter in the encounters array,
-          render a <tr> with its info */}
-          {filteredEncounters.map((encounter) => (
-            <EncounterRow
-              key={encounter.id}
-              encounter={encounter}
-            />
-          ))}
-        </tbody>
-      </table>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Status</th>
+              <th>Type</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* For each encounter in the encounters array,
+            render a <tr> with its info */}
+            {filteredEncounters.map((encounter) => (
+              <EncounterRow
+                key={encounter.id}
+                encounter={encounter}
+              />
+            ))}
+          </tbody>
+        </table>
+      </main>
     </div>
   );
 }

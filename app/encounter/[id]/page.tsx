@@ -27,20 +27,23 @@ export default async function EncounterDetail ({params}: EncounterDetailProps ) 
     }
     return (
         <div className={styles.page}>
-            <h1>Encounter Details</h1>
-            <p><strong>Encounter Id:</strong> {encounter.id}</p>
-            <p><strong>Date:</strong> {new Date(encounter.date).toLocaleDateString()}</p>
-            <p><strong>Time:</strong> {new Date(encounter.date).toLocaleTimeString('en-US', {timeZone: "UTC", hour: '2-digit', minute: '2-digit'})}</p>
-            <p><strong>Patient:</strong> {encounter.patientName}</p>
-            <p><strong>Patient Id:</strong> {encounter.patientId}</p>
-            <p><strong>Status:</strong> <StatusLabel status={encounter.status} /></p>
-            <p><strong>Type:</strong> {encounter.type}</p>
-            <p><strong>Provider:</strong> {encounter.provider}</p>
-            <p><strong>Chief Complaint:</strong> {encounter.chiefComplaint}</p>
-            <h3>Clinical notes:</h3>
-            <p>{encounter.notes || "No notes available."}</p>
-            <br/>
-            <Link href="/"> ← </Link>
+            <main className={styles.mainCompact}>
+                <h1>Encounter Details</h1>
+                <p><strong>Encounter Id:</strong> {encounter.id}</p>
+                <p><strong>Date:</strong> {new Date(encounter.date).toLocaleDateString()}</p>
+                <p><strong>Time:</strong> {new Date(encounter.date).toLocaleTimeString('en-US', {timeZone: "UTC", hour: '2-digit', minute: '2-digit'})}</p>
+                <p><strong>Patient:</strong> {encounter.patientName}</p>
+                <p><strong>Patient Id:</strong> {encounter.patientId}</p>
+                <p><strong>Status:</strong> <StatusLabel status={encounter.status} /></p>
+                <p><strong>Type:</strong> {encounter.type}</p>
+                <p><strong>Provider:</strong> {encounter.provider}</p>
+                <p><strong>Chief Complaint:</strong> {encounter.chiefComplaint}</p>
+                <h3>Clinical notes:</h3>
+                <p>{encounter.notes || "No notes available."}</p>
+                <br/>
+                <Link href="/"> ← </Link>
+            </main>
+            
         </div>
     );
 }
