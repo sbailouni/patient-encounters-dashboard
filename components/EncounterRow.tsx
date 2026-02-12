@@ -1,5 +1,6 @@
 //Component that renders a row <tr> that represents one patient encounter
 import {Encounter} from "../types/encounter"
+import StatusLabel from "../components/StatusLabel";
 
 // Defining props expected by the component using an interface
 interface EncounterRowProps {
@@ -11,7 +12,9 @@ export default function EncounterRow({ encounter }: EncounterRowProps) {
         //table row will be placed inside <tbody> in page.tsx
         <tr>
             <td>{encounter.patientName}</td>
-            <td>{encounter.status}</td>
+            <td>
+                <StatusLabel status={encounter.status} />
+            </td>
             <td>{encounter.type}</td>
             {/* Convert date to string */}
             <td>{new Date(encounter.date).toLocaleDateString()}</td>
