@@ -17,6 +17,8 @@ export default function Home() {
   // setSelectedStatuses : function that updates state
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
 
+  const [searchInput, setSearchInput] = useState<string>("");
+
   //function that adds or removes a status from the selectedStatuses
   //triggered when a change happens to a checkbox
   const toggleStatus = (status: string) => {
@@ -35,19 +37,32 @@ export default function Home() {
   //filter the encounters based on selected statuses
   const filteredEncounters: Encounter[] = data.encounters.filter(
     (encounter) => {
-      //if no statuses are selected, show all encounters (default case)
-      if (selectedStatuses.length=== 0) { 
-        return true;
-      }
-      // if there are statuses selected,
-      // show only encounters with those selected statuses
-      return selectedStatuses.includes(encounter.status);
+      //if no statuses are selected, show all encounters (first case)
+      //if there are statuses selected, show only encounters with those statuses
+      const passesStatusFilter = 
+        selectedStatuses.length=== 0 || selectedStatuses.includes(encounter.status);
+
+      //checks whether patient name contains the typed input
+      const passesSearchFilter = 
+        encounter.patientName.toLowerCase().includes(searchInput.toLowerCase());
+
+      //return encounters that match selected statuses *and* patient name input
+      return passesStatusFilter && passesSearchFilter; 
     }
   );
 
   return (
     <div className={styles.page}>
       <h1>Patient Encounters Dashboard</h1>
+      {/* Patient name search bar */}
+      <input
+        type="text"
+        placeholder="Search by patient name..."
+        value={searchInput}
+        //updates searchInput state whenever user types
+        onChange={(e)=> setSearchInput(e.target.value)}
+        className= {styles.searchBar}
+      />
       {/* Dropdown status filter */}
       <details className={styles.dropdown}>
         <summary>
