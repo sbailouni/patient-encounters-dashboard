@@ -9,7 +9,7 @@ export interface Encounter {
     patientId: string;
     date: string;
     type: string;
-    status: "completed" | "pending" | "cancelled";
+    status: string;
     provider: string;
     chiefComplaint: string;
     notes: string;
