@@ -1,0 +1,70 @@
+{
+  "encounters": [
+    {
+      "id": "enc-001",
+      "patientName": "Maria Garcia",
+      "patientId": "pat-123",
+      "date": "2025-02-10T09:30:00Z",
+      "type": "follow-up",
+      "status": "completed",
+      "provider": "Dr. Sarah Smith",
+      "chiefComplaint": "Routine weight management check-in",
+      "notes": "Patient reports improved energy levels and adherence to meal plan. Weight down 3 lbs from last visit."
+    },
+    {
+      "id": "enc-002",
+      "patientName": "James Wilson",
+      "patientId": "pat-456",
+      "date": "2025-02-11T14:00:00Z",
+      "type": "initial-consultation",
+      "status": "pending",
+      "provider": "Dr. Michael Chen",
+      "chiefComplaint": "New patient intake for weight loss program",
+      "notes": ""
+    },
+    {
+      "id": "enc-003",
+      "patientName": "Sofia Rodriguez",
+      "patientId": "pat-789",
+      "date": "2025-02-09T11:15:00Z",
+      "type": "lab-review",
+      "status": "completed",
+      "provider": "Dr. Sarah Smith",
+      "chiefComplaint": "Review metabolic panel results",
+      "notes": "Labs show improved A1C levels. Continue current medication regimen."
+    },
+    {
+      "id": "enc-004",
+      "patientName": "Robert Johnson",
+      "patientId": "pat-321",
+      "date": "2025-02-08T16:30:00Z",
+      "type": "follow-up",
+      "status": "cancelled",
+      "provider": "Dr. Michael Chen",
+      "chiefComplaint": "Monthly check-in",
+      "notes": "Patient rescheduled due to conflict."
+    },
+    {
+      "id": "enc-005",
+      "patientName": "Emily Chen",
+      "patientId": "pat-654",
+      "date": "2025-02-12T10:00:00Z",
+      "type": "follow-up",
+      "status": "pending",
+      "provider": "Dr. Sarah Smith",
+      "chiefComplaint": "Discuss nutrition plan adjustments",
+      "notes": ""
+    },
+    {
+      "id": "enc-006",
+      "patientName": "Michael Brown",
+      "patientId": "pat-987",
+      "date": "2025-02-07T13:45:00Z",
+      "type": "initial-consultation",
+      "status": "completed",
+      "provider": "Dr. Michael Chen",
+      "chiefComplaint": "Evaluation for bariatric program eligibility",
+      "notes": "Patient meets initial criteria. Scheduled follow-up labs and psychological evaluation."
+    }
+  ]
+}
