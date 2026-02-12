@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import data from "../data/encounters.json"
 //import interface for type safety
 import { Encounter } from "../types/encounter"
+import EncounterRow from "@/components/EncounterRow";
 
 //define array of encounters with type Encounter[]
 const encounters: Encounter[] = data.encounters; 
@@ -24,13 +25,10 @@ export default function Home() {
           {/* For each encounter in the encounters array,
           render a <tr> with its info */}
           {encounters.map((encounter) => (
-            <tr key={encounter.id}>
-              <td>{encounter.patientName}</td>
-              <td>{encounter.status}</td>
-              <td>{encounter.type}</td>
-              {/* Convert date to string */}
-              <td>{new Date(encounter.date).toLocaleDateString()}</td>
-            </tr>
+            <EncounterRow
+              key={encounter.id}
+              encounter={encounter}
+            />
           ))}
         </tbody>
       </table>
