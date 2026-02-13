@@ -5,6 +5,7 @@ import {Encounter} from "../../../types/encounter";
 import StatusLabel from "@/components/StatusLabel";
 import BackArrowIcon from "@/components/BackArrowIcon";
 import Link from "next/link"; //link component for navigation between pages
+import { encounterTypeMap } from "@/types/encounterTypeMap";
 
 //Define props for the component
 interface EncounterDetailProps {
@@ -42,7 +43,7 @@ export default async function EncounterDetail ({params}: EncounterDetailProps ) 
                     <p><strong>Patient:</strong> {encounter.patientName}</p>
                     <p><strong>Patient Id:</strong> {encounter.patientId}</p>
                     <p><strong>Status:</strong> <StatusLabel status={encounter.status} /></p>
-                    <p><strong>Type:</strong> {encounter.type}</p>
+                    <p><strong>Type:</strong> {encounterTypeMap[encounter.type]}</p>
                     <p><strong>Provider:</strong> {encounter.provider}</p>
                     <p><strong>Chief Complaint:</strong> {encounter.chiefComplaint}</p>
                     <h3>Clinical notes:</h3>

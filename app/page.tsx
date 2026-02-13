@@ -130,6 +130,8 @@ export default function Home() {
         </div>
 
         <div className={styles.cardList} role="list" aria-label="Patient encounters">
+          {/* iterate over the filtered encounters and render
+            one EncounterCard component per encounter */}
           {filteredEncounters.map((encounter) => (
             <EncounterCard key={encounter.id} encounter={encounter} />
           ))}

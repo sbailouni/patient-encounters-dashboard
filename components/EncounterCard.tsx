@@ -6,6 +6,7 @@ import { Encounter } from "../types/encounter";
 import StatusLabel from "./StatusLabel";
 import { useRouter } from "next/navigation";
 import styles from "./EncounterCard.module.css";
+import { encounterTypeMap } from "@/types/encounterTypeMap";
 
 // Defining props expected by the component using an interface
 interface EncounterCardProps {
@@ -41,7 +42,7 @@ export default function EncounterCard({ encounter }: EncounterCardProps) {
       {/* Encounter type row */}
       <div className={styles.cardRow}>
         <span className={styles.cardLabel}>Type</span>
-        <span className={styles.cardValue}>{encounter.type}</span>
+        <span className={styles.cardValue}>{encounterTypeMap[encounter.type]}</span>
       </div>
       {/* Encounter date row */}
       <div className={styles.cardRow}>
