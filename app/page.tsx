@@ -1,16 +1,11 @@
 "use client"; //required to use react hooks (useState) 
 
 import styles from "./page.module.css";
-//import mock data from JSON file
-import data from "../data/encounters.json"
 //import interface for type safety
 import { Encounter } from "../types/encounter"
 import EncounterCard from "@/components/EncounterCard";
 import { useState, useRef, useEffect } from "react";
 import DropdownIcon from "@/components/DropdownIcon";
-
-//define array of encounters with type Encounter[]
-const encounters: Encounter[] = data.encounters; 
 
 export default function Home() {
   //state that tracks which statuses are currently selected in the filter
@@ -23,6 +18,14 @@ export default function Home() {
   // state that tracks whether the dropdown is open or closed 
   // in order to close it when user clicks on anything else
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // state for data coming from the API
+  // encounters: array of encounters returned by backend
+  // isLoading: tracks whether a request is currently in flight
+  // error: holds an error message when the request fails
+  const [encounters, setEncounters] = useState<Encounter[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   // create a ref to the <details> element so we can detect clicks
   // outside the dropdown
@@ -59,22 +62,71 @@ export default function Home() {
     }); 
   };
 
-  //filter the encounters based on selected statuses
-  const filteredEncounters: Encounter[] = data.encounters.filter(
-    (encounter) => {
-      //if no statuses are selected, show all encounters (first case)
-      //if there are statuses selected, show only encounters with those statuses
-      const passesStatusFilter = 
-        selectedStatuses.length=== 0 || selectedStatuses.includes(encounter.status);
+  // Fetch encounters from the API whenever filters
+  // (selectedStatuses or searchInput) change
+  useEffect(() => {
+    // allows to cancel fetch if user updates filters or clicks away
+    const controller = new AbortController();
 
-      //checks whether patient name contains the typed input
-      const passesSearchFilter = 
-        encounter.patientName.toLowerCase().includes(searchInput.toLowerCase());
+    const fetchEncounters = async () => {
+      // set loading state as true and clear any previous error
+      setIsLoading(true);
+      setError(null);
 
-      //return encounters that match selected statuses *and* patient name input
-      return passesStatusFilter && passesSearchFilter; 
-    }
-  );
+      try {
+        // create query string based on user's selected filters
+        // ex: ?status=completed,pending&q=smith
+        const params = new URLSearchParams();
+
+        //if any statuses are selected, add them to the query
+        if (selectedStatuses.length > 0) {
+          params.set("status", selectedStatuses.join(","));
+        }
+
+        //if there's a text in search bar, add it to the query
+        if (searchInput.trim()) {
+          params.set("q", searchInput.trim());
+        }
+        //convert parameters to string format
+        const queryString = params.toString();
+        // create final URL for the API endpoint
+        const url = queryString
+          ? `/api/encounters?${queryString}`
+          : "/api/encounters";
+
+        // send request to backend API
+        const response = await fetch(url, { signal: controller.signal });
+
+        if (!response.ok) { 
+          //throw error if response isn't successful
+          throw new Error(`Failed to load encounters (status ${response.status})`);
+        }
+        
+        // convert response to JSON and update state with the encounters
+        const body: { encounters: Encounter[] } = await response.json();
+        setEncounters(body.encounters);
+      } catch (err) {
+        //if request was cancelled, don't do anything
+        if ((err as Error).name === "AbortError") {
+          return;
+        }
+        console.error(err); 
+        // show error message and clear data
+        setError("Unable to load encounters. Please try again.");
+        setEncounters([]);
+      } finally {
+        // set loading state to false after
+        // all requests (both successful and unsuccessful)
+        setIsLoading(false);
+      }
+    };
+
+    //call function to fetch encounters
+    fetchEncounters();
+
+    // cancel request if filters change quickly or user clicks away
+    return () => controller.abort();
+  }, [selectedStatuses, searchInput]); 
 
   return (
     <div className={styles.page}>
@@ -130,9 +182,23 @@ export default function Home() {
         </div>
 
         <div className={styles.cardList} role="list" aria-label="Patient encounters">
-          {/* iterate over the filtered encounters and render
-            one EncounterCard component per encounter */}
-          {filteredEncounters.map((encounter) => (
+          {/* basic loading and error states */}
+          {isLoading && (
+            <p>Loading encounters...</p>
+          )}
+
+          {/* show error message if there's an error and we're not loading anymore */}
+          {error && !isLoading && (
+            <p>{error}</p>
+          )}
+
+          {/* show a message when there are no results */}
+          {!isLoading && !error && encounters.length === 0 && (
+            <p>No encounters match your filters.</p>
+          )}
+
+          {/* render one card per encounter if data loaded with no error */}
+          {!isLoading && !error && encounters.map((encounter) => (
             <EncounterCard key={encounter.id} encounter={encounter} />
           ))}
         </div>
