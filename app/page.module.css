@@ -37,6 +37,51 @@
   gap: 1rem;
 }
 
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid var(--button-secondary-border);
+  background: var(--foreground);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.backLink svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.backLink:hover {
+  background-color: var(--button-secondary-hover);
+  color: var(--text-primary);
+}
+
+.detailCard {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: var(--foreground);
+  border: 1px solid var(--button-secondary-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.detailCard p {
+  margin: 0 0 0.75rem;
+}
+
+.detailCard h3 {
+  margin: 1.25rem 0 0.5rem;
+}
+
+.detailCard h3:first-of-type {
+  margin-top: 0.5rem;
+}
+
 .heading {
   margin: 0;
   font-size: 1.75rem;
@@ -132,8 +177,14 @@
 }
 
 .chevron {
-  font-size: 0.65rem;
+  display: inline-flex;
+  align-items: center;
   transition: transform 0.254s ease;
+}
+
+.chevron svg {
+  width: 0.65rem;
+  height: 0.65rem;
 }
 
 .dropdown[open] .chevron {

@@ -7,6 +7,7 @@ import data from "../data/encounters.json"
 import { Encounter } from "../types/encounter"
 import EncounterRow from "@/components/EncounterRow";
 import { useState, useRef, useEffect } from "react";
+import DropdownIcon from "@/components/DropdownIcon";
 
 //define array of encounters with type Encounter[]
 const encounters: Encounter[] = data.encounters; 
@@ -106,7 +107,7 @@ export default function Home() {
               }}
             >
               Filter by Status 
-              <span className={styles.chevron} aria-hidden>▼</span>
+              <span className={styles.chevron} aria-hidden><DropdownIcon/></span>
             </summary>
             <div className={styles.dropdownPanel}>
               {/* Generate a check box for each status*/}
