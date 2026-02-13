@@ -28,7 +28,7 @@ export default async function EncounterDetail ({params}: EncounterDetailProps ) 
     return (
         <div className={styles.page}>
             <main className={styles.mainCompact}>
-                <h1>Encounter Details</h1>
+                <h1 className={styles.heading}>Encounter Details</h1>
                 <p><strong>Encounter Id:</strong> {encounter.id}</p>
                 <p><strong>Date:</strong> {new Date(encounter.date).toLocaleDateString()}</p>
                 <p><strong>Time:</strong> {new Date(encounter.date).toLocaleTimeString('en-US', {timeZone: "UTC", hour: '2-digit', minute: '2-digit'})}</p>
