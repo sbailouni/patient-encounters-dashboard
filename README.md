@@ -42,6 +42,18 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - Shows clinical notes
 - Back navigation to list
 
+## File Descriptions
+- **app/page.tsx**: Dashboard (encounters list, search, filter)
+- **app/encounter/\[id]/page.tsx**: Encounter details page.
+- **app/api/encounters/route.ts**: `GET /api/encounters` – list encounters with query params for filtering.
+- **app/api/encounters/\[id]**: `GET /api/encounters/[id]` — get a single encounter by ID.
+- **data/encounters.json**: Encounters mock data.
+- **components/EncounterCard.tsx**: Card UI for a single encounter.
+- **components/StatusLabel.tsx**: Component that renders a styled span element for the status label.
+- **types/encounter.ts**, **types/encounterTypeMap.ts**: Type definitions and type label mapping
+- **app/page.module.css**: Styling for dashboard and encounter details page. 
+- **components/EncounterCard.module.css**: Styling for encounter card component.
+
 ## Assumptions and Decisions 
 
 - All data is retrieved from a local JSON file. Thus there's no real database or authentication that needs to be implemented.
@@ -61,3 +73,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - Add more options for filtering such as filtering encounter types or date ranges. 
 - Implement a dark mode toggle or a switch to change between dark mode and light mode. 
 - Set up database integration and write unit tests to check for correct implementation of components and filtering.
+
+## Live Demo
+
+- https://patient-encounters-dashboard.vercel.app
