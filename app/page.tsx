@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import data from "../data/encounters.json"
 //import interface for type safety
 import { Encounter } from "../types/encounter"
-import EncounterRow from "@/components/EncounterRow";
+import EncounterCard from "@/components/EncounterCard";
 import { useState, useRef, useEffect } from "react";
 import DropdownIcon from "@/components/DropdownIcon";
 
@@ -129,27 +129,10 @@ export default function Home() {
           </details>
         </div>
 
-        <div className={styles.tableWrapper}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Patient Name</th>
-                <th>Status</th>
-                <th>Type</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* For each encounter in the encounters array,
-              render a <tr> with its info */}
-              {filteredEncounters.map((encounter) => (
-                <EncounterRow
-                  key={encounter.id}
-                  encounter={encounter}
-                />
-              ))}
-            </tbody>
-          </table>
+        <div className={styles.cardList} role="list" aria-label="Patient encounters">
+          {filteredEncounters.map((encounter) => (
+            <EncounterCard key={encounter.id} encounter={encounter} />
+          ))}
         </div>
       </main>
     </div>

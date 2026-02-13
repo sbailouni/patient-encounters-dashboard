@@ -89,42 +89,12 @@
   text-align: center;
 }
 
-.tableWrapper {
+/* Encounter cards list (all screen sizes) */
+.cardList {
   width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--foreground);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.table {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table th, .table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--button-secondary-border);
-  text-align: center;
-}
-
-.table th {
-  background-color: #f8f8f8;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.table tbody tr:hover {
-  background-color: var(--button-secondary-hover);
-}
-
-.table tbody tr {
-  transition: background-color 0.15s ease;
-}
-
-.table tbody tr:last-child td {
-  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .flexContainer {
@@ -144,6 +114,7 @@
   border-radius: 12px;
   font-size: 0.9rem;
   color: var(--text-primary);
+  background-color: var(--foreground);
   outline: none;
   transition: border-color 0.3s ease;
   &:focus {
@@ -209,4 +180,84 @@
   display: block;
   padding: 6px 0;
   cursor: pointer;
+}
+
+/* tablet media queries */
+@media (max-width: 768px) {
+  .main, .mainCompact {
+    padding: 1.5rem 1rem;
+  }
+
+  .main {
+    gap: 1.5rem;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .flexContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .searchBar {
+    min-width: 0;
+  }
+
+  .detailCard {
+    padding: 1.25rem 1.25rem;
+  }
+}
+
+/* mobile media queries */
+@media (max-width: 480px) {
+  .page {
+    padding-top: 1rem; 
+  }
+
+  .main, .mainCompact {
+    padding: 1rem 0.75rem;
+  }
+
+  .main {
+    gap: 1.25rem;
+  }
+
+  .heading {
+    font-size: 1.25rem;
+  }
+
+  .cardList {
+    gap: 0.875rem;
+  }
+
+  .searchBar,
+  .dropdown {
+    padding: 10px 12px;
+    font-size: 1rem; 
+  }
+
+  .detailCard {
+    padding: 1rem 1rem;
+  }
+
+  .detailCard h1 {
+    margin-bottom: 1rem;
+  }
+
+  .dropdownPanel {
+    max-height: min(60vh, 280px);
+    overflow-y: auto;
+  }
+
+  .backLink {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .dropdownSummary {
+    justify-content: space-between;
+  }
 }
